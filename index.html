@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Inovatech - Dashboard de Qualidade do Ar</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <header>
+        <h1>Inovatech - Dashboard de Qualidade do Ar</h1>
+    </header>
+    <main>
+        <section id="dashboard" class="quadros-container">
+            <div class="sensor" id="temperature">
+                <h2>Temperatura</h2>
+                <div class="thermometer-bar">
+                    <div id="thermometer-fill" class="thermometer-fill"></div>
+                </div>
+                <div id="temperature-value" class="temperature-value"></div>
+            </div>
+            <div class="sensor" id="humidity">
+                <h2>Umidade</h2>
+                <div class="cloud-container">
+                    <svg class="cloud" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="lightblue" width="150px" height="90px">
+                        <path d="M19.36 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.64-4.96z"/>
+                    </svg>
+                    <div class="humidity-bar">
+                        <div id="humidity-fill" class="humidity-fill"></div>
+                    </div>
+                </div>
+                <div id="humidity-value" class="humidity-value"></div>
+            </div>
+            <div class="sensor" id="smoke">
+                <h2>Fumaça</h2>
+                <div id="smoke-value" class="smoke-value" data-percentage="0"></div>
+            </div>
+        </section>
+
+
+        <section class="grafico-principal">
+            <canvas id="myChart" class="grafico" height="500" width="500"></canvas>
+        </section>
+
+        <audio id="alert-sound" src="alert.mp3" loop></audio>
+    </main>
+    <script src="scripts.js" defer></script>
+</body>
+</html>

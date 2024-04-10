@@ -1,0 +1,183 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+header {
+    background-color: #005f73;
+    color: #ffffff;
+    padding: 20px 0;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+main {
+    padding: 40px 20px;
+    display: flex;
+    
+    flex-wrap: wrap;
+}
+
+.sensor {
+    background-color: #ffffff;
+    margin: 20px;
+    padding: 50px;
+    border-radius: 20px;
+    box-shadow: 0 10px 8px rgba(0,0,0,0.1);
+    flex-basis: calc(33% - 40px);
+    text-align: center;
+    transition: transform 0.3s ease;
+
+    
+}
+
+.sensor:hover {
+    transform: translateY(-10px);
+}
+
+.sensor h2 {
+    color: #005f73;
+    margin-bottom: 10px;
+}
+/*
+.thermometer {
+    width: 80%;
+    height: 20px;
+    background-color: #e0e0e0;
+    border-radius: 10px;
+    position: relative;
+    margin: 20px auto;
+}*/
+
+.thermometer-bar {
+    width: 60%;
+    height: 20px;
+    background-color: #e0e0e0;
+    border-radius: 10px;
+    position: relative;
+    margin: 20px auto;
+    overflow: hidden;
+}
+
+.thermometer-fill {
+    height: 100%;
+    background-color: #0093e9;
+    border-radius: 10px;
+    width: 0%;
+    transition: width 0.5s ease;
+}
+/*
+.thermometer-value {
+    position: absolute;
+    width: 0%;
+    background-color: #ff477e;
+    border-radius: 10px;
+    transition: width 0.5s ease;
+}*/
+
+.temperature-value {
+    font-size: 2em;
+    margin-top: 10px;
+}
+
+.cloud-container {
+    position: relative;
+    height: 150px;
+    margin: 20px 0;
+}
+
+.cloud {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 150px;
+    height: 90px;
+    background: url('cloud.svg') no-repeat center center;
+    background-size: contain;
+}
+
+.humidity-bar {
+    width: 60%;
+    height: 20px;
+    background-color: #e0e0e0;
+    border-radius: 10px;
+    position: relative;
+    margin: 20px auto;
+    overflow: hidden;
+}
+
+.humidity-fill {
+    height: 100%;
+    background-color: #0093e9;
+    border-radius: 10px;
+    width: 0%;
+    transition: width 0.5s ease;
+}
+
+.humidity-value {
+    font-size: 2em;
+    margin-top: 10px;
+}
+
+.smoke-value {
+    font-size: 2em;
+    margin-top: 10px;
+}
+
+@media (max-width: 768px) {
+    main {
+        flex-direction: column;
+        align-items: left;
+    }
+
+    .sensor {
+        flex-basis: 100%;
+        max-width: 100%;
+        margin: 10px 0;
+        
+    }
+
+    .thermometer, .humidity-bar {
+        width: 90%;
+    }
+}
+
+@media (max-width: 480px) {
+    header, .sensor h2, .temperature-value, .humidity-value {
+        font-size: 90%;
+    }
+
+    .sensor {
+        flex-basis: 100%;
+        max-width: 100%;
+        margin: 10px 0;
+    }
+    
+}
+
+@keyframes blinker {
+    50% {
+        background-color: #ffc107;
+    }
+}
+
+.temperature-alert {
+    animation: blinker 1s linear infinite;
+}
+
+.smoke-alert {
+    animation: blinker 1s linear infinite;
+}
+.quadros-container{
+    justify-content: left;
+
+}
+
+#myChart{
+    width: 5000px;
+    height: 4000px;
+}
