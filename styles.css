@@ -177,7 +177,9 @@ main {
 
 }
 
-#myChart{
-    width: 5000px;
-    height: 4000px;
+.grafico-principal{
+    width: 1900px;
+    height: 900px;
+    display: flex;
+    flex-wrap: wrap;
 }
