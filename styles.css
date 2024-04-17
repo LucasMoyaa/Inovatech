@@ -177,9 +177,19 @@ main {
 
 }
 
-.grafico-principal{
-    width: 1900px;
+.grafico-container{
+    padding-left: 20px;
+    padding-right: 20px;
+    border: 2px #333 solid;
+
+    max-width: 1500px;
+    max-height: 900px;
+    width: 1500px;
     height: 900px;
-    display: flex;
-    flex-wrap: wrap;
+}
+
+.grafico{
+    width: 100%;
+    max-width: 1500px;
+    max-height: 900px;  
 }
