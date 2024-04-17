@@ -1,7 +1,3 @@
-var humidityValue = 0;
-var tempValue = 0;
-var smokeValue = 0;
-
 document.addEventListener('DOMContentLoaded', function() {
     const temperatureValueElement = document.querySelector('#temperature-value');
     const thermometerFillElement = document.querySelector('#thermometer-fill');
@@ -13,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const serverURL = 'http://localhost:8080/api/v1/monitoramento';
 
-    let monitoramentoData = [];
+    let lastMonitoramentoData;
 
     fetch(serverURL,
         {
@@ -26,23 +22,19 @@ document.addEventListener('DOMContentLoaded', function() {
         .then(function (res) {
             if(res.status >= 200 && res.status <= 299){
                 console.log(res)
-                res.json().then((produtos) => {
+                res.json().then((monitoramento) => {
 
-                    produtos.map(p => {
-                        monitoramentoData.push(p);
-                    })
+                    lastMonitoramentoData = monitoramento[monitoramento.length - 1];
                 
                     let chartData = {
                             labels: ['0h', '1h', '2h', '3h', '4h', '5h', '6h', '7h', '8h', '9h', '10h', '11h', '12h', '13h', '14h', '15h', '16h', '17h', '18h', '19h', '20h', '21h', '22h', '23h'],
                             datasets: [{
-                            label: 'Dados de Qualidade do Ar',
-                            data: monitoramentoData.map(x => x.temperatura),
-                            borderColor: 'blue',
-                            backgroundColor: 'rgba(0, 0, 255, 0.2)',
-                        }]
+                                label: 'Dados de Qualidade do Ar',
+                                data: monitoramento.map(x => x.temperatura),
+                                borderColor: 'blue',
+                                backgroundColor: 'rgba(0, 0, 255, 0.2)'
+                            }]
                     };
-                    
-                    
 
                     let myChart = new Chart(ctx, {
                         type: 'line',
@@ -56,10 +48,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
                     function updateSensorData() {
                         let smoke = "Não Detectada";
-                        tempValue = Math.floor(Math.random() * 50);
+                        tempValue = lastMonitoramentoData.temperatura
                         thermometerHeightPercentage = (tempValue / 50) * 100;
-                        humidityValue = Math.floor(Math.random() * 100);
-                        smokeValue = Math.floor(Math.random() * 50);
+                        humidityValue = lastMonitoramentoData.umidade;
+                        smokeValue = lastMonitoramentoData.fumaca;
                 
                         if(smokeValue == true){
                             smoke = "Detectada"
@@ -80,18 +72,22 @@ document.addEventListener('DOMContentLoaded', function() {
                         }
                 
                         // Atualize os dados do gráfico a cada hora
-                        
-                        chartData.datasets[0].data.push(tempValue); // verificar id
+                        if(lastMonitoramentoData.id != monitoramento[monitoramento.length - 1].id){
+                            monitoramento.push(lastMonitoramentoData);
+                            chartData.datasets[0].data.push(tempValue); // verificar id
+                        }
                         if(chartData.datasets[0].data.length == 25){
                             chartData.datasets[0].data = [];
                         }
                         
                         myChart.update();
                     }
-                    
+
                     updateSensorData();
+                    
                     // Chame a função de atualização a cada hora (3600000 milissegundos)
                     setInterval(function(){
+                        lastMonitoramentoAPI();
                         updateSensorData();
                     }, 6000); // 3600000 tentar sincronizar com hora da api
                 })
@@ -100,5 +96,26 @@ document.addEventListener('DOMContentLoaded', function() {
             
         .catch(function (res) { console.log(res) })
 
-    
+    function lastMonitoramentoAPI(){
+        fetch(serverURL + '/last',
+            {
+                headers: {
+                    "Accept": "*/*",
+                    "Content-Type": "application/json",
+                },
+                method: "GET"
+            })
+            .then(function (res) {
+                if(res.status >= 200 && res.status <= 299){
+                    console.log(res)
+                    res.json().then((monitoramento) => {
+                        lastMonitoramentoData = monitoramento;
+                    })
+                }
+            })
+            .catch(function (res) { console.log(res) })
+        }
 });
+
+
+
