@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const smokeValueElement = document.querySelector('#smoke-value')
     const ctx = document.getElementById('myChart').getContext('2d');
 
-    const serverURL = 'http://localhost:8080/api/v1/monitoramento';
+    const serverURL = 'https://inovatech-monitoramento-ar-backend.onrender.com/api/v1/monitoramento';
 
     let lastMonitoramentoData;
 
@@ -83,13 +83,17 @@ document.addEventListener('DOMContentLoaded', function() {
                         myChart.update();
                     }
 
+                    //  "Apr 17, 2024, 7:56:32 PM"
+
+                    let dataMonitoramento = new Date(lastMonitoramentoData.dataMonitoramento); // data e hora do ultimo monitoramento
+
                     updateSensorData();
                     
                     // Chame a função de atualização a cada hora (3600000 milissegundos)
                     setInterval(function(){
                         lastMonitoramentoAPI();
-                        updateSensorData();
-                    }, 6000); // 3600000 tentar sincronizar com hora da api
+                        updateSensorData(); 
+                    }, 600000); // 3600000 tentar sincronizar com hora da api
                 })
 
             }})
