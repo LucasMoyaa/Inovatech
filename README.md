@@ -23,3 +23,4 @@ v1.0.0
 
 ## Autor(es):
 212193 - João Pedro Palzzolli - joaopedropalazzolli@gmail.com <br>
+211982 - Lucas Moya - lucasmoya112@hotmail.com <br>
