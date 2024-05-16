@@ -2,7 +2,7 @@
 InovaTech-Monitoramento-Ar-Frontend
 
 ## Descrição: 
-Este é o projeto de uma interface gráfica criada para mostrar os dados de monitoramento de ar da api, podendo assim ter uma visualização mais clara das informações gravadas.
+Este é o projeto de uma interface gráfica criada para mostrar os dados de monitoramento de ar, podendo assim ter uma visualização mais clara das informações gravadas.
 
 ## Pré-requisitos: 
 ![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
