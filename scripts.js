@@ -1,15 +1,16 @@
 document.addEventListener('DOMContentLoaded', function() {
     const temperatureValueElement = document.querySelector('#temperature-value');
     const thermometerFillElement = document.querySelector('#thermometer-fill');
-    const alertSound = document.getElementById('alert-sound');
     const humidityValueElement = document.querySelector('#humidity-value');
     const humidityFillElement = document.querySelector('#humidity-fill');
     const smokeValueElement = document.querySelector('#smoke-value')
     const ctx = document.getElementById('myChart').getContext('2d');
+    const desativarAlerta = document.getElementById("desativarAlerta");
 
     const serverURL = 'https://inovatech-monitoramento-ar-backend.onrender.com/api/v1/monitoramento';
 
     let lastMonitoramentoData;
+    let alertSound = document.getElementById('alert-sound');
 
     fetch(serverURL,
         {
@@ -53,8 +54,23 @@ document.addEventListener('DOMContentLoaded', function() {
                         humidityValue = lastMonitoramentoData.umidade;
                         smokeValue = lastMonitoramentoData.fumaca;
                 
-                        if(smokeValue == true){
-                            smoke = "Detectada"
+                        if(smokeValue == true || tempValue >= 40 || humidityValue < 40 || humidityValue > 70){
+                            if(smokeValue == true){
+                                smoke = "Detectada";
+                            }
+                            if(alertSound != null){
+                                alertSound.play();
+                            }
+                            document.body.classList.add('alert');
+                            desativarAlertaSonoro();
+                            // adicionar mensagem personalizada para cada detectação
+                        } else {
+                            document.body.classList.remove('alert');
+                            if(alertSound != null){
+                                alertSound.pause();
+                            }
+                            alertSound = document.getElementById("alert-sound");
+                            desativarAlerta.innerHTML = "";
                         }
                 
                         smokeValueElement.textContent = `${smoke}`;
@@ -63,20 +79,13 @@ document.addEventListener('DOMContentLoaded', function() {
                         humidityFillElement.style.width = `${humidityValue}%`;
                         thermometerFillElement.style.width = `${thermometerHeightPercentage}%`;
                 
-                        if (tempValue >= 50) {
-                            document.body.classList.add('temperature-alert');
-                            alertSound.play();
-                        } else {
-                            document.body.classList.remove('temperature-alert');
-                            alertSound.pause();
-                        }
-                
                         // Atualize os dados do gráfico a cada hora
                         if(lastMonitoramentoData.id != monitoramento[monitoramento.length - 1].id){
                             monitoramento.push(lastMonitoramentoData);
                             chartData.datasets[0].data.push(tempValue); // verificar id
                         }
-                        if(chartData.datasets[0].data.length == 25){
+
+                        if(chartData.datasets[0].data.length % 25 == 0){
                             chartData.datasets[0].data = [];
                         }
                         
@@ -93,7 +102,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     setInterval(function(){
                         lastMonitoramentoAPI();
                         updateSensorData(); 
-                    }, 600000); // 3600000 tentar sincronizar com hora da api
+                    }, 10000); // 3600000 tentar sincronizar com hora da api
                 })
 
             }})
@@ -119,7 +128,13 @@ document.addEventListener('DOMContentLoaded', function() {
             })
             .catch(function (res) { console.log(res) })
         }
+
+    function desativarAlertaSonoro(){
+        desativarAlerta.innerHTML = 
+            '<button id="btn_desativar_alerta" class="btn_desativar_alerta">Desativar Alerta Sonoro</button>';
+        document.getElementById("btn_desativar_alerta").onclick = function(){
+            alertSound = null;
+        }
+    }
 });
-
-
 
