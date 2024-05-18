@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const ctx = document.getElementById('myChart').getContext('2d');
     const desativarAlerta = document.getElementById("desativarAlerta");
 
-    const serverURL = 'https://inovatech-monitoramento-ar-backend.onrender.com/api/v1/monitoramento';
+    const serverURL = 'https://inovatech-monitoramento-ar-backend.onrender.com/api/v1/monitoramento/currentday';
 
     let lastMonitoramentoData;
     let alertSound = document.getElementById('alert-sound');
