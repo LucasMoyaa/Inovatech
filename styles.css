@@ -165,13 +165,10 @@ main {
     }
 }
 
-.temperature-alert {
+.alert {
     animation: blinker 1s linear infinite;
 }
 
-.smoke-alert {
-    animation: blinker 1s linear infinite;
-}
 .quadros-container{
     justify-content: left;
 
