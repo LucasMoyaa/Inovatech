@@ -14,12 +14,14 @@ Este é o projeto de uma interface gráfica criada para mostrar os dados de moni
 - FindDados -> Busca e adicionar todos os dados no gráfico.
 - lastMonitoramentoAPI -> Busca o ultimo dado registrado e altera os valores de Temperatura, Umidade e Fumaça.
 - updateSensorData -> Busca e atualiza os dados de Temperatura, Umidade, fumaça e registra os valores no gráfico.
+- DesativarAlertaSonoro -> Desativa o som emitido quando o alerta é acionado.
 
 ## Implantações: (Aplicadas dentro da atividade)
 Implantações do Projeto.
 
 ## Versionamento:
-v1.0.0
+v1.0.0 <br>
+v1.0.1
 
 ## Autor(es):
 212193 - João Pedro Palzzolli - joaopedropalazzolli@gmail.com <br>
