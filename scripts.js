@@ -92,10 +92,6 @@ document.addEventListener('DOMContentLoaded', function() {
                         myChart.update();
                     }
 
-                    //  "Apr 17, 2024, 7:56:32 PM"
-
-                    let dataMonitoramento = new Date(lastMonitoramentoData.dataMonitoramento); // data e hora do ultimo monitoramento
-
                     updateSensorData();
                     
                     // Chame a função de atualização a cada hora (3600000 milissegundos)
