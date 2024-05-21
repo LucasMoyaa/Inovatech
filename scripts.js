@@ -7,12 +7,12 @@ document.addEventListener('DOMContentLoaded', function() {
     const ctx = document.getElementById('myChart').getContext('2d');
     const desativarAlerta = document.getElementById("desativarAlerta");
 
-    const serverURL = 'https://inovatech-monitoramento-ar-backend.onrender.com/api/v1/monitoramento/currentday';
+    const serverURL = 'https://inovatech-monitoramento-ar-backend.onrender.com/api/v1/monitoramento';
 
     let lastMonitoramentoData;
     let alertSound = document.getElementById('alert-sound');
 
-    fetch(serverURL,
+    fetch(serverURL + `/currentday`,
         {
             headers: {
                 "Accept": "*/*",
