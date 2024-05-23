@@ -16,8 +16,11 @@ Este é o projeto de uma interface gráfica criada para mostrar os dados de moni
 - updateSensorData -> Busca e atualiza os dados de Temperatura, Umidade, fumaça e registra os valores no gráfico.
 - DesativarAlertaSonoro -> Desativa o som emitido quando o alerta é acionado.
 
-## Implantações: (Aplicadas dentro da atividade)
-Implantações do Projeto.
+## Implantações: 
+- Busca pelos dados da API.
+- Atualização dos dados na interface.
+- Alerta sonoro para dados prejudiciais a saúde.
+- Botão de desativação do alerta sonoro.
 
 ## Versionamento:
 v1.0.0 <br>
